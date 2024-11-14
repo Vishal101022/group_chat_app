@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+:root {
+  --green: rgb(38, 211, 98);
+  --white: rgb(255, 255, 255);
+  --black: rgb(38, 35, 35);
+  --light: rgb(252, 245, 235);
+  --dark: #1d3557b2;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  transition: 0.2s;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--light);
+}
+
+.chat-app {
+  width: 80%;
+  max-width: 600px;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px var(--black);
+  overflow: hidden;
+}
+
+h1 {
+  background-color: var(--green);
+  color: var(--white);
+  text-align: center;
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.chat-area {
+  padding: 1rem;
+  height: 400px;
+  overflow-y: auto;
+  background-color: var(--white);
+}
+
+.message {
+  background-color: #ddd;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 3px;
+}
+
+.input-area {
+  display: flex;
+  padding: 1rem;
+  background-color: var(--white);
+}
+
+#message-input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
