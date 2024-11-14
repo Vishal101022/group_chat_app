@@ -27,7 +27,7 @@ async function handerFormSubmit(e) {
       });
       return;
     }
-    await axios.post("", signUpDetails);
+    await axios.post("http://localhost:3000/signup", signUpDetails);
 
     Swal.fire({
       toast: true,
