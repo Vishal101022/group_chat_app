@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+:root {
+  --green: rgb(38, 211, 98);
+  --white: rgb(255, 255, 255);
+  --black: rgb(38, 35, 35);
+  --light: rgb(252, 245, 235);
+  --dark: #1d3557b2;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +16,7 @@
 }
 body {
   display: flex;
-  background-color: #fcf5eb;
+  background-color: var(--light);
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -20,19 +28,19 @@ body {
   flex-direction: column;
   width: 26rem;
   height: 34rem;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--white);
   border-radius: 0.5rem;
-  border-top: 5px solid rgb(38, 211, 98);
+  border-top: 5px solid var(--green);
   padding-top: 1rem;
 }
 .container h1 {
-  color: #1d3557;
+  color: var(--dark);
   font-size: 2.5rem;
 }
 
 .container p {
   margin-top: 1rem;
-  color: #1d3557da;
+  color: var(--dark);
   width: 20rem;
   text-align: center;
   padding-top: 1rem;
@@ -43,12 +51,12 @@ form {
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--white);
   height: 23rem;
   width: 20rem;
 }
 .inputContainer {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--white);
   height: 11rem;
   width: 80%;
   display: flex;
@@ -60,13 +68,13 @@ input {
   outline: none;
   border: none;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--dark);
   height: 2rem;
   margin-bottom: 2rem;
 }
 .signUpBtn {
-  background-color: rgb(38, 211, 98);
-  color: black;
+  background-color: var(--green);
+  color: var(--black);
   outline: none;
   border: none;
   padding: 0.5rem;
@@ -76,12 +84,12 @@ input {
   margin-bottom: 2rem;
 }
 .signUpBtn:hover {
-  background-color: rgb(38, 35, 35);
-  color: white;
+  background-color: var(--black);
+  color: var(--white);
 }
 span {
   font-size: 0.8rem;
-  color: black;
+  color: var(--dark);
 }
 
 /* media query for mobile devices */
