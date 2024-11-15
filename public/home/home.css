@@ -25,7 +25,31 @@ body {
   font-family: Arial, sans-serif;
   background-color: var(--light);
 }
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--light);
+  color: var(--white);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
 
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin-right: 1rem;
+}
 .chat-app {
   width: 80%;
   max-width: 600px;
@@ -79,4 +103,15 @@ button {
   border: none;
   border-radius: 20px;
   cursor: pointer;
+}
+/* media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 20rem;
+    height: 30rem;
+    border-radius: 1.5rem;
+  }
+  .container h1 {
+    font-size: 2rem;
+  }
 }
