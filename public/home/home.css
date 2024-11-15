@@ -106,12 +106,10 @@ button {
 }
 /* media query for mobile devices */
 @media only screen and (max-width: 600px) {
-  .container {
-    width: 20rem;
-    height: 30rem;
-    border-radius: 1.5rem;
+  .chat-app {
+    width: 90%;
   }
-  .container h1 {
-    font-size: 2rem;
+  h1{
+    font-size: 1.2rem;
   }
 }
