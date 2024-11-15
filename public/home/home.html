@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Group Chat App | Home</title>
-    <link rel="stylesheet" href="home.css">
-</head>
-<body>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
     <!-- navbar-->
     <div class="navbar">
-       <ul>
-        <li class=" user-info">
-           <div>
-             <span id="user-name"></span>
+      <ul>
+        <li class="user-info">
+          <div>
+            <span id="user-name"></span>
             <button id="logout-button">Logout</button>
-           </div>
+          </div>
         </li>
-       </ul>
+      </ul>
     </div>
     <div class="chat-app">
-        <h1>ChatGram </h1>
-        <div id="chat-area" class="chat-area"></div>
-        <div class="input-area">
-            <input type="text" id="message-input" placeholder="Type a message...">
-            <button id="send-button" type="submit">Send</button>
-        </div>
+      <h1>ChatGram</h1>
+      <div id="chat-area" class="chat-area"></div>
+      <div class="input-area">
+        <input type="text" id="message-input" placeholder="Type a message..." />
+        <button id="send-button" type="submit">Send</button>
+      </div>
     </div>
+    <script src="https://cdn.socket.io/4.8.0/socket.io.min.js"></script>
     <script src="home.js"></script>
     <!-- Include SweetAlert2 CSS and JS from CDN -->
     <link
@@ -35,5 +36,5 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Include Axios JS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</body>
+  </body>
 </html>
