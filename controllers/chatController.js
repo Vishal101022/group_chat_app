@@ -1,5 +1,5 @@
 const chat = require("../models/chatModel");
-
+const userModel = require("../models/userModel");
 // create message
 exports.createChat = async (req, res) => { 
     const userId = req.user;
@@ -18,7 +18,7 @@ exports.getChat = async (req, res) => {
     try {
         const messages = await chat.findAll({
             where: { userId },
-            order: [["createdAt", "DESC"]]
+            include: [{ model: userModel, attributes: ["name"] }],
         });
         res.status(200).json({ messages });
     } catch (err) {
