@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000;
 // routes
 const userRoutes = require("./routes/userRoutes");
 const loginRoutes = require("./routes/loginRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 // models
 
 
@@ -22,8 +23,9 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
-app.use('/', userRoutes)
-app.use('/', loginRoutes)
+app.use('/api', userRoutes)
+app.use('/api', loginRoutes)
+app.use('/api', chatRoutes)
 
 // test connection
 async function testConnection() {
