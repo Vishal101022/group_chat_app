@@ -12,6 +12,8 @@ const { availableParallelism } = require("node:os");
 const cluster = require("node:cluster");
 const { createAdapter, setupPrimary } = require("@socket.io/cluster-adapter");
 const onlineClients = new Map();
+require("./util/cronJobs");
+
 
 // routes
 const userRoutes = require("./routes/userRoutes");
