@@ -154,6 +154,10 @@ exports.deleteGroup = async (req, res) => {
 exports.leaveGroup = async (req, res) => {
   const { groupId } = req.params;
   try {
+    const group = await groupModel.findByPk(groupId);
+    if(group.createdBy === req.user.id){
+      return res.status(403).json({ error: "admin cannot leave the group" });
+    }
     await groupMember.destroy({ where: { groupId, userId: req.user.id } });
     res.status(200).json({ message: "Group left successfully" });
   } catch (err) {
