@@ -25,8 +25,6 @@ async function handerFormSubmit(e) {
       loginDetails
     );
     localStorage.setItem("token", response.data.token);
-    localStorage.removeItem("currentPage");
-    localStorage.removeItem("limit");
     window.location.href = "/public/home/home.html";
   } catch (error) {
     if (error.response && error.response.status === 401) {
