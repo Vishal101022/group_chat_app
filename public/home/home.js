@@ -11,7 +11,9 @@ const inviteButton = document.getElementById("invite-button");
 const menuButton = document.getElementById("menu-button");
 const dropdownMenu = document.getElementById("dropdown-menu");
 const userName = document.getElementById("user-name");
+const leaveGroupButton = document.getElementById("leave-group");
 
+// important variables
 let currentGroupId = null;
 const token = localStorage.getItem("token");
 const socket = io("http://localhost:3000", {
@@ -24,6 +26,7 @@ const socket = io("http://localhost:3000", {
 window.addEventListener("DOMContentLoaded", async () => {
   sendButton.addEventListener("click", sendMessage);
   logoutButton.addEventListener("click", logout);
+  leaveGroupButton.addEventListener("click", leaveGroup);
   await fetchGroups();
 });
 
@@ -318,3 +321,39 @@ groupInput.addEventListener("keydown", (event) => {
     }
   }
 });
+
+// leave group
+async function leaveGroup() {
+  try {
+    const groupId = currentGroupId;
+    console.log("groupId", groupId);
+    await axios.delete(
+      `http://localhost:3000/api/group/leave/${groupId}`,
+      { headers: { Authorization: `${token}` } }
+    );
+    currentGroupId = null;
+    await fetchGroups();
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      icon: "success",
+      text: "You have left the group",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+  } catch (error) {
+    console.log(error);
+    if (error.response.status === 403) {
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "error",
+        text: "admin cannot leave the group",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+    }
+  }
+}
