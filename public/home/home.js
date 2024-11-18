@@ -12,6 +12,7 @@ const menuButton = document.getElementById("menu-button");
 const dropdownMenu = document.getElementById("dropdown-menu");
 const userName = document.getElementById("user-name");
 const leaveGroupButton = document.getElementById("leave-group");
+const onlineClientList = document.getElementById("online-list");
 
 // important variables
 let currentGroupId = null;
@@ -327,10 +328,9 @@ async function leaveGroup() {
   try {
     const groupId = currentGroupId;
     console.log("groupId", groupId);
-    await axios.delete(
-      `http://localhost:3000/api/group/leave/${groupId}`,
-      { headers: { Authorization: `${token}` } }
-    );
+    await axios.delete(`http://localhost:3000/api/group/leave/${groupId}`, {
+      headers: { Authorization: `${token}` },
+    });
     currentGroupId = null;
     await fetchGroups();
     Swal.fire({
@@ -357,3 +357,13 @@ async function leaveGroup() {
     }
   }
 }
+
+socket.on("onlineClients", (clients) => {
+  const onlineList = document.getElementById("online-list");
+  onlineList.innerHTML = "";
+  clients.forEach((client) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${client.name}`;
+    onlineList.appendChild(listItem);
+  });
+});
