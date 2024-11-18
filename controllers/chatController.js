@@ -14,10 +14,10 @@ exports.createChat = async (req, res) => {
 
 // get message
 exports.getChat = async (req, res) => { 
-    const userId = req.user;
+    const user = req.user;
     try {
         const messages = await chat.findAll({
-            where: { userId },
+            where: { userId: user.id },
             include: [{ model: userModel, attributes: ["name"] }],
         });
         res.status(200).json({ messages });
