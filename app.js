@@ -8,6 +8,10 @@ const cors = require("cors");
 const auth = require("./middleware/auth");
 dotenv.config();
 const port = process.env.PORT || 3000;
+const { availableParallelism } = require("node:os");
+const cluster = require("node:cluster");
+const { createAdapter, setupPrimary } = require("@socket.io/cluster-adapter");
+const onlineClients = new Map();
 
 // routes
 const userRoutes = require("./routes/userRoutes");
@@ -27,7 +31,11 @@ const corsOptions = {
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, { cors: corsOptions });
+const io = new Server(
+  server,
+  { cors: corsOptions },
+  { adapter: createAdapter() }
+);
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use("/api", userRoutes);
@@ -46,10 +54,28 @@ async function testConnection() {
   }
 }
 
+if (cluster.isPrimary) {
+  const numCPUs = availableParallelism();
+  // create one worker per available core
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork({
+      PORT: 3000 + i,
+    });
+  }
+
+  // set up the adapter on the primary thread
+  return setupPrimary();
+}
 async function socketConnection() {
   io.use(auth.socketMiddleware);
   io.on("connection", (socket) => {
-    console.log("A user connected", socket.user.name);
+    onlineClients.set(socket.id, { name: socket.user.name });
+
+    // Notify all clients about updated online users
+    io.emit("onlineClients", Array.from(onlineClients.values()));
+
+    console.log(`User connected: ${socket.user.name}, socket ID: ${socket.id}`);
+
     socket.on("joinGroup", (groupId) => {
       socket.join(`group-${groupId}`);
       console.log(`User joined group-${groupId}`);
@@ -74,6 +100,8 @@ async function socketConnection() {
 
     socket.on("disconnect", () => {
       console.log("A user disconnected");
+      onlineClients.delete(socket.id);
+      io.emit("onlineClients", Array.from(onlineClients.values()));
     });
   });
 }
